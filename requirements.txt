@@ -1,0 +1,5 @@
+pip==20.2.4
+py7zr==0.11.0
+pycryptodome==3.9.9
+setuptools==50.3.2
+texttable==1.6.3
