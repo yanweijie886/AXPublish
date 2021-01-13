@@ -18,7 +18,7 @@ def send_mail(folder_name, content):
     mail_pass = "fyS-m3v-CK8-k9c"  # 密码
 
     sender = 'weijie.yan@dessmann.com.cn'
-    receivers = ['15329885@qq.com','2656062151@qq.com','kaige.chen@dessmann.com.cn']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
+    receivers = ['15329885@qq.com', '2656062151@qq.com', 'kaige.chen@dessmann.com.cn']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
     message = MIMEText('原型地址：http://192.168.30.55/HTML/' + folder_name + '\r\n' + content, 'plain', 'utf-8')
     message['From'] = Header(sender, 'utf-8')
     message['To'] = Header("所有人", 'utf-8')
@@ -48,21 +48,25 @@ def delete_file(filepath):
         print("no filepath")
 
 
+def print_with_time(content):
+    print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), content)
+
+
 # 压缩文件夹并移动
-def compress(file_folder_path, folder_name):
+def compress(file_folder_path, folder_name, tar_dic=os.environ['HOME'] + '/SynologyDrive'):
     cmd = 'display notification \"' + \
           "正在发布，请勿操作" + '\" with title \"发布提醒\"'
     call(["osascript", "-e", cmd])
     if os.path.exists(os.path.join(file_folder_path, folder_name)):
         with py7zr.SevenZipFile(folder_name + '.7z', 'w') as archive:
-            print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), "开始压缩文件夹", )
+            print_with_time("开始压缩文件夹")
             archive.writeall(file_folder_path + folder_name, folder_name)
-            print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), '文件夹压缩成功，文件名称为：' + folder_name)
-            if os.path.exists(os.path.join(os.environ['HOME'] + '/Nutstore Files/我的坚果云/7z', folder_name + '.7z')):
-                os.remove(os.path.join(os.environ['HOME'] + '/Nutstore Files/我的坚果云/7z', folder_name + '.7z'))
-            shutil.move(folder_name + '.7z', os.environ['HOME'] + '/Nutstore Files/我的坚果云/7z')
+            print_with_time('文件夹压缩成功，文件名称为：' + folder_name)
+            if os.path.exists(os.path.join(tar_dic, folder_name + '.7z')):
+                os.remove(os.path.join(tar_dic, folder_name + '.7z'))
+            shutil.move(folder_name + '.7z', tar_dic)
             delete_file(file_folder_path + folder_name)
-            print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), '发布成功！')
+            print_with_time('发布成功！')
             cmd = 'display notification \"' + \
                   "发布成功" + '\" with title \"恭喜\"'
             call(["osascript", "-e", cmd])
@@ -73,10 +77,10 @@ def compress(file_folder_path, folder_name):
         call(["osascript", "-e", cmd])
 
 
-def click(file_folder_path, folder_name, content,x):
+def click(file_folder_path, folder_name, content, x):
     compress(file_folder_path, folder_name)
     if x == 2:
-        send_mail(folder_name,content)
+        send_mail(folder_name, content)
 
 
 path = os.environ['HOME'] + '/Documents/Axure/HTML/'
@@ -86,16 +90,15 @@ top.wm_attributes('-topmost', 1)
 top.geometry("250x500+750+200")
 
 LANGS = [
-    ("不发送更新日志",1),
-    ("发送更新日志",2)]
-
+    ("不发送更新日志", 1),
+    ("发送更新日志", 2)]
 
 v = tkinter.IntVar()
 v.set(1)
 
 for lang, num in LANGS:
-    b = tkinter.Radiobutton(top,text=lang,variable=v,value=num)
-    b.grid(row=num+3, column=0)
+    b = tkinter.Radiobutton(top, text=lang, variable=v, value=num)
+    b.grid(row=num + 3, column=0)
 
 entry = tkinter.Entry(top, width=20)
 entry.insert(0, '原型-ERP')
@@ -119,19 +122,19 @@ te.grid(row=3, column=0)
 B = tkinter.Button(
     top,
     text="发布",
-    command=lambda: click(path, entry.get(), te.get('0.0', 'end'),v.get())
+    command=lambda: click(path, entry.get(), te.get('0.0', 'end'), v.get())
 ).grid(row=0, column=1)
 
 B2 = tkinter.Button(
     top,
     text="发布",
-    command=lambda: click(path, entry2.get(), te.get('0.0', 'end'),v.get()),
+    command=lambda: click(path, entry2.get(), te.get('0.0', 'end'), v.get()),
 ).grid(row=1, column=1)
 
 B3 = tkinter.Button(
     top,
     text="发布",
-    command=lambda: click(path, entry3.get(), te.get('0.0', 'end'),v.get())
+    command=lambda: click(path, entry3.get(), te.get('0.0', 'end'), v.get())
 ).grid(row=2, column=1)
 
 if __name__ == '__main__':
