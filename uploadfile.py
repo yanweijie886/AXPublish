@@ -104,14 +104,6 @@ entry = tkinter.Entry(top, width=20)
 entry.insert(0, '原型-ERP')
 entry.grid(row=0, column=0)
 
-entry2 = tkinter.Entry(top, width=20)
-entry2.insert(0, '原型-ERP')
-entry2.grid(row=1, column=0)
-
-entry3 = tkinter.Entry(top, width=20)
-entry3.insert(0, '原型-ERP')
-entry3.grid(row=2, column=0)
-
 te = tkinter.Text(
     top,
     width=20
@@ -125,17 +117,6 @@ B = tkinter.Button(
     command=lambda: click(path, entry.get(), te.get('0.0', 'end'), v.get())
 ).grid(row=0, column=1)
 
-B2 = tkinter.Button(
-    top,
-    text="发布",
-    command=lambda: click(path, entry2.get(), te.get('0.0', 'end'), v.get()),
-).grid(row=1, column=1)
-
-B3 = tkinter.Button(
-    top,
-    text="发布",
-    command=lambda: click(path, entry3.get(), te.get('0.0', 'end'), v.get())
-).grid(row=2, column=1)
 
 if __name__ == '__main__':
     top.mainloop()
