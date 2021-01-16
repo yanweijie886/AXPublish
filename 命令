@@ -1,1 +1,5 @@
-pip freeze>requirements.txt #保存依赖
+文件生成
+pip freeze > requirements.txt
+
+包安装
+pip install -r requirements.txt
