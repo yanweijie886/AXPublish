@@ -48,6 +48,7 @@ def compress(file_folder_path, folder_name, tar_dic=os.environ[HOME] + '/Synolog
     if platform.system() == 'Windows':
         file_folder_ab_path="C:"+file_folder_ab_path
         tar_dic="C:"+tar_dic
+        tar_file_dic="C:"+tar_file_dic
     if os.path.exists(file_folder_ab_path) :
         with py7zr.SevenZipFile(folder_name + '.7z', 'w') as archive:
             # print_with_time("开始压缩文件夹")
@@ -56,6 +57,7 @@ def compress(file_folder_path, folder_name, tar_dic=os.environ[HOME] + '/Synolog
             if os.path.exists(tar_file_dic):
                 os.remove(tar_file_dic)
             shutil.move(folder_name + '.7z', tar_dic)
+            time.sleep(15)
             delete_file(file_folder_ab_path)
             print_with_time('发布成功！')
     else:
