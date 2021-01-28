@@ -37,7 +37,7 @@ te = tkinter.Text(
     top,
     width=20
 )
-te.insert(index=tkinter.END, chars=entry.get()+'的更新日志：')
+te.insert(index=tkinter.END, chars=entry.get() + '的更新日志：')
 te.grid(row=3, column=0)
 
 B = tkinter.Button(
