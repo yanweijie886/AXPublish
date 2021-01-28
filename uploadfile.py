@@ -11,7 +11,7 @@ print(platform.system())
 
 if platform.system() == 'Windows':
     print('Windows系统')
-    HOME='HOMEPATH'
+    HOME = 'HOMEPATH'
 elif platform.system() == 'Linux':
     print('Linux系统')
     HOME = 'HOME'
@@ -46,10 +46,10 @@ def compress(file_folder_path, folder_name, tar_dic=os.environ[HOME] + '/Synolog
     tar_file_dic = os.path.join(tar_dic, folder_name + '.7z')
     file_folder_ab_path = os.path.join(file_folder_path, folder_name)
     if platform.system() == 'Windows':
-        file_folder_ab_path="C:"+file_folder_ab_path
-        tar_dic="C:"+tar_dic
-        tar_file_dic="C:"+tar_file_dic
-    if os.path.exists(file_folder_ab_path) :
+        file_folder_ab_path = "C:" + file_folder_ab_path
+        tar_dic = "C:" + tar_dic
+        tar_file_dic = "C:" + tar_file_dic
+    if os.path.exists(file_folder_ab_path):
         with py7zr.SevenZipFile(folder_name + '.7z', 'w') as archive:
             # print_with_time("开始压缩文件夹")
             archive.writeall(file_folder_ab_path, folder_name)
@@ -57,7 +57,6 @@ def compress(file_folder_path, folder_name, tar_dic=os.environ[HOME] + '/Synolog
             if os.path.exists(tar_file_dic):
                 os.remove(tar_file_dic)
             shutil.move(folder_name + '.7z', tar_dic)
-            time.sleep(15)
             delete_file(file_folder_ab_path)
             print_with_time('发布成功！')
     else:
