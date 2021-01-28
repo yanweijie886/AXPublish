@@ -34,9 +34,10 @@ def delete_file(filepath):
 
 def print_with_time(content):
     print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), content)
-    cmd = 'display notification \"' + \
-          content + '\" with title \"日志\"'
-    call(["osascript", "-e", cmd])
+    if platform.system() != 'Windows':
+        cmd = 'display notification \"' + \
+              content + '\" with title \"日志\"'
+        call(["osascript", "-e", cmd])
 
 
 # 压缩文件夹并移动
@@ -44,7 +45,10 @@ def compress(file_folder_path, folder_name, tar_dic=os.environ[HOME] + '/Synolog
     print_with_time('正在发布，请勿操作')
     tar_file_dic = os.path.join(tar_dic, folder_name + '.7z')
     file_folder_ab_path = os.path.join(file_folder_path, folder_name)
-    if os.path.exists(file_folder_ab_path):
+    if platform.system() == 'Windows':
+        file_folder_ab_path="C:"+file_folder_ab_path
+        tar_dic="C:"+tar_dic
+    if os.path.exists(file_folder_ab_path) :
         with py7zr.SevenZipFile(folder_name + '.7z', 'w') as archive:
             # print_with_time("开始压缩文件夹")
             archive.writeall(file_folder_ab_path, folder_name)

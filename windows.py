@@ -7,7 +7,6 @@ import api
 
 path = os.environ[uploadfile.HOME] + '/Documents/Axure/HTML/'
 
-
 def click(file_folder_path, folder_name, content, x):
     uploadfile.compress(file_folder_path, folder_name)
     if x == 2:
