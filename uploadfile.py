@@ -5,6 +5,19 @@ import os
 import os.path
 import time
 from subprocess import call
+import platform
+
+print(platform.system())
+
+if platform.system() == 'Windows':
+    print('Windows系统')
+    HOME='HOMEPATH'
+elif platform.system() == 'Linux':
+    print('Linux系统')
+    HOME = 'HOME'
+else:
+    print('其他')
+    HOME = 'HOME'
 
 
 def delete_file(filepath):
@@ -27,10 +40,10 @@ def print_with_time(content):
 
 
 # 压缩文件夹并移动
-def compress(file_folder_path, folder_name, tar_dic=os.environ['HOME'] + '/SynologyDrive'):
+def compress(file_folder_path, folder_name, tar_dic=os.environ[HOME] + '/SynologyDrive'):
     print_with_time('正在发布，请勿操作')
-    tar_file_dic=os.path.join(tar_dic, folder_name + '.7z')
-    file_folder_ab_path=os.path.join(file_folder_path, folder_name)
+    tar_file_dic = os.path.join(tar_dic, folder_name + '.7z')
+    file_folder_ab_path = os.path.join(file_folder_path, folder_name)
     if os.path.exists(file_folder_ab_path):
         with py7zr.SevenZipFile(folder_name + '.7z', 'w') as archive:
             # print_with_time("开始压缩文件夹")
@@ -43,5 +56,3 @@ def compress(file_folder_path, folder_name, tar_dic=os.environ['HOME'] + '/Synol
             print_with_time('发布成功！')
     else:
         print_with_time('文件不存在')
-
-

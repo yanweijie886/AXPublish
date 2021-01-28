@@ -5,7 +5,7 @@ import uploadfile
 import os
 import api
 
-path = os.environ['HOME'] + '/Documents/Axure/HTML/'
+path = os.environ[uploadfile.HOME] + '/Documents/Axure/HTML/'
 
 
 def click(file_folder_path, folder_name, content, x):
