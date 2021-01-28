@@ -1,7 +1,9 @@
+# -*- coding:UTF-8 -*-
 import tkinter
 import mail
 import uploadfile
 import os
+import api
 
 path = os.environ['HOME'] + '/Documents/Axure/HTML/'
 
@@ -9,7 +11,7 @@ path = os.environ['HOME'] + '/Documents/Axure/HTML/'
 def click(file_folder_path, folder_name, content, x):
     uploadfile.compress(file_folder_path, folder_name)
     if x == 2:
-        mail.send_mail(folder_name, content)
+        api.addlog(content)
 
 
 top = tkinter.Tk()
@@ -21,7 +23,7 @@ LANGS = [
     ("发送更新日志", 2)]
 
 v = tkinter.IntVar()
-v.set(1)
+v.set(2)
 
 for lang, num in LANGS:
     b = tkinter.Radiobutton(top, text=lang, variable=v, value=num)
@@ -35,7 +37,7 @@ te = tkinter.Text(
     top,
     width=20
 )
-te.insert(index=tkinter.END, chars='更新日志：')
+te.insert(index=tkinter.END, chars=entry.get()+'的更新日志：')
 te.grid(row=3, column=0)
 
 B = tkinter.Button(
