@@ -4,3 +4,9 @@ pip freeze > requirements.txt
 包安装
 pip install -r requirements.txt
 
+
+load() 从json文件中读取json格式数据
+loads() 将字符串类型数据转化为json格式数据
+dump() 将json格式数据保存到文件
+dumps() 将json格式数据保存为字符串类型
+

@@ -3,15 +3,16 @@ import tkinter
 import uploadfile
 import os
 import api
+import config.GVC
 
-path = os.environ[uploadfile.HOME] + '/Documents/Axure/HTML/'
+
+path = os.environ[uploadfile.HOME] + config.GVC.PATH["HTMLPath"]
 
 
 def click(file_folder_path, folder_name, content, x):
     uploadfile.compress(file_folder_path, folder_name)
     if x == 2:
         api.addlog(content)
-
 
 
 top = tkinter.Tk()

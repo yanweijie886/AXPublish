@@ -7,6 +7,7 @@ import os.path
 import time
 from subprocess import call
 import platform
+import config.GVC
 
 print(platform.system())
 
