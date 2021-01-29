@@ -43,7 +43,7 @@ def print_with_time(content):
 
 
 # 压缩文件夹并移动
-def compress(file_folder_path, folder_name, tar_dic=os.environ[HOME] + '\SynologyDrive'):
+def compress(file_folder_path, folder_name, tar_dic=os.environ[HOME] + config.GVC.PATH["sycnPath"]):
     print_with_time('正在发布，请勿操作')
     tar_file_dic = os.path.join(tar_dic, folder_name + '.7z')
     file_folder_ab_path = os.path.join(file_folder_path, folder_name)

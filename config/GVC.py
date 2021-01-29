@@ -1,6 +1,6 @@
 import json
 import platform
-config_json='./config.json'
+config_json='./config/config.json'
 with open(config_json) as f:
     PATH = json.load(f)['path']
 
