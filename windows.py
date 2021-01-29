@@ -1,6 +1,5 @@
 # -*- coding:UTF-8 -*-
 import tkinter
-import mail
 import uploadfile
 import os
 import api
@@ -9,12 +8,10 @@ path = os.environ[uploadfile.HOME] + '/Documents/Axure/HTML/'
 
 
 def click(file_folder_path, folder_name, content, x):
-    try:
-        uploadfile.compress(file_folder_path, folder_name)
-        if x == 2:
-            api.addlog(content)
-    except:
-        print("发布失败")
+    uploadfile.compress(file_folder_path, folder_name)
+    if x == 2:
+        api.addlog(content)
+
 
 
 top = tkinter.Tk()
