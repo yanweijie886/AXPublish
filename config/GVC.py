@@ -5,7 +5,7 @@ with open(config_json) as f:
     PATH = json.load(f)['path']
 
 
-print(platform.system())
+#print(platform.system())
 
 if platform.system() == 'Windows':
     print('Windows系统')
