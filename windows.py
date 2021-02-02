@@ -6,46 +6,45 @@ import api
 import config.GVC
 
 
-path = os.environ[uploadfile.HOME] + config.GVC.PATH["HTMLPath"]
+path = os.environ[config.GVC.HOME] + config.GVC.PATH["HTMLPath"]
 
 
-def click(file_folder_path, folder_name, content, x):
+def click(file_folder_path, folder_name, content):
     uploadfile.compress(file_folder_path, folder_name)
-    if x == 2:
-        api.addlog(content)
+    api.addlog(content)
 
 
 top = tkinter.Tk()
 top.wm_attributes('-topmost', 1)
-top.geometry("250x500+750+200")
+top.geometry("400x400+520+250")
 
-LANGS = [
-    ("不发送更新日志", 1),
-    ("发送更新日志", 2)]
-
-v = tkinter.IntVar()
-v.set(2)
-
-for lang, num in LANGS:
-    b = tkinter.Radiobutton(top, text=lang, variable=v, value=num)
-    b.grid(row=num + 3, column=0)
 
 entry = tkinter.Entry(top, width=20)
 entry.insert(0, '原型-ERP')
-entry.grid(row=0, column=0)
+entry.grid(row=1, column=0)
 
 te = tkinter.Text(
     top,
-    width=20
+    width=50,
+    height=20,
+    borderwidth=1,
 )
-te.insert(index=tkinter.END, chars=entry.get() + '的更新日志：')
-te.grid(row=3, column=0)
+te.insert(index=tkinter.END, chars='更新日志：')
+te.grid(row=0, column=0)
 
 B = tkinter.Button(
     top,
     text="发布",
-    command=lambda: click(path, entry.get(), te.get('0.0', 'end'), v.get())
-).grid(row=0, column=1)
+    command=lambda: click(path, entry.get(), te.get('0.0', 'end'))
+).grid(row=3, column=0)
+
+
+L=tkinter.Label(
+    text="111",
+    background=	'#E0E0E0',
+    height=2,
+    width=10
+).grid(row=4, column=0)
 
 if __name__ == '__main__':
     top.mainloop()
