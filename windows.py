@@ -5,19 +5,19 @@ import os
 import api
 import config.GVC
 
-
 path = os.environ[config.GVC.HOME] + config.GVC.PATH["HTMLPath"]
 
 
-def click(file_folder_path, folder_name, content):
-    uploadfile.compress(file_folder_path, folder_name)
+def click():
+    folder_name = entry.get()
+    content = te.get('0.0', 'end')
+    uploadfile.compress(path, folder_name)
     api.addlog(content)
 
 
 top = tkinter.Tk()
 top.wm_attributes('-topmost', 1)
 top.geometry("400x400+520+250")
-
 
 entry = tkinter.Entry(top, width=20)
 entry.insert(0, '原型-ERP')
@@ -35,13 +35,12 @@ te.grid(row=0, column=0)
 B = tkinter.Button(
     top,
     text="发布",
-    command=lambda: click(path, entry.get(), te.get('0.0', 'end'))
+    command=click
 ).grid(row=3, column=0)
 
-
-L=tkinter.Label(
-    text="111",
-    background=	'#E0E0E0',
+L = tkinter.Text(
+    top,
+    background='#E0E0E0',
     height=2,
     width=10
 ).grid(row=4, column=0)
