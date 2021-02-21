@@ -4,8 +4,11 @@ import uploadfile
 import os
 import api
 import config.GVC
+from selenium import webdriver
+import time
 
 path = os.environ[config.GVC.HOME] + config.GVC.PATH["HTMLPath"]
+
 
 
 def click():
@@ -13,6 +16,9 @@ def click():
     content = te.get('0.0', 'end')
     uploadfile.compress(path, folder_name)
     api.addlog(content)
+    time.sleep(3)
+    driver = webdriver.Chrome("/usr/local/bin/chromedriver")
+    driver.get("http://192.168.30.55/HTML/%E5%8E%9F%E5%9E%8B-ERP")
 
 
 top = tkinter.Tk()
