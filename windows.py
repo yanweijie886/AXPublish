@@ -6,6 +6,7 @@ import api
 import config.GVC
 import tkinter as tk
 import time
+import threading
 
 path = os.environ[config.GVC.HOME] + config.GVC.PATH["HTMLPath"]
 project = ['小嘀师傅', '小嘀管家', '小嘀进货', '原型-ERP']
@@ -41,7 +42,7 @@ class AutoTest():
         self.B = tkinter.Button(
             self.top,
             text="发布",
-            command=self.click
+            command=self.click_th2
         ).grid(row=self.i, column=0)
 
         self.L = tkinter.Text(
@@ -57,16 +58,24 @@ class AutoTest():
     def changeText(self, content):
         self.L.insert(index=tk.END, chars=str(content) + '\n')
 
+    def run_threaded(self,job_func):
+        job_thread = threading.Thread(target=job_func)
+        job_thread.start()
+
+    def click_th2(self):
+        self.run_threaded(self.click)
 
     def click(self):
         folder_name = project[self.v.get() - 1]
         print(folder_name)
         content = self.te.get('0.0', 'end')
         res_list=uploadfile.compress(path, folder_name)
-        api.addlog(content)
+        # api.addlog(content)
         for res in res_list:
             self.changeText(res)
         time.sleep(3)
+
+
 
 
 

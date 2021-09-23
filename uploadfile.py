@@ -8,6 +8,7 @@ import time
 from subprocess import call
 import platform
 import config.GVC
+import threading
 
 
 def delete_file(filepath):
@@ -30,6 +31,8 @@ def print_with_time(content):
               content + '\" with title \"日志\"'
         call(["osascript", "-e", cmd])
     return res
+
+
 
 
 # 压缩文件夹并移动
